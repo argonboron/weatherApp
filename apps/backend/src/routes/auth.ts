@@ -1,19 +1,11 @@
 import { Router } from 'express';
-// import { z } from 'zod';
-// import { validate } from '../middleware/validate';
-// import { AuthPayload } from '@shared/types';
+import { register, login } from '../controllers/authController.js';
+import { validateRequest } from '../middleware/validateRequest.js';
+import { registerSchema, loginSchema } from '../validation/authSchemas.js';
 
 const router = Router();
 
-// TODO: Add Zod validation, controller logic
-router.post('/register', (req, res) => {
-  // TODO: Register user, return JWT
-  res.json({ success: true, token: 'TODO', user: { id: 'TODO', username: req.body.username } });
-});
-
-router.post('/login', (req, res) => {
-  // TODO: Authenticate user, return JWT
-  res.json({ success: true, token: 'TODO', user: { id: 'TODO', username: req.body.username } });
-});
+router.post('/register', validateRequest(registerSchema), register);
+router.post('/login', validateRequest(loginSchema), login);
 
 export default router;

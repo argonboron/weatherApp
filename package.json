@@ -14,6 +14,7 @@
     "format": "pnpm -r run format"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
     "eslint": "^10.0.0",
     "prettier": "^3.0.0"
   }

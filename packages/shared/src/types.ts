@@ -3,7 +3,7 @@
 export interface User {
   id: string;
   username: string;
-  // TODO: Add more user fields as needed
+  hashedPassword: string;
 }
 
 export interface AuthPayload {
@@ -12,15 +12,23 @@ export interface AuthPayload {
 }
 
 export interface AuthResponse {
+  success: boolean;
   token: string;
   user: User;
 }
 
 export interface WeatherResponse {
   city: string;
-  temperature: number;
+  country: string;
+  temperatureC: number;
+  feelsLikeC: number;
   condition: string;
-  // TODO: Add more weather fields as needed
+  conditionIcon: string;
+  humidity: number;
+  windKph: number;
+  uv: number;
+  isDay: boolean;
+  updatedAt: string;
 }
 
 export interface Message {
@@ -29,6 +37,11 @@ export interface Message {
   userId: string;
   content: string;
   timestamp: number;
+}
+
+export interface WeatherApiError {
+  code: number;
+  message: string;
 }
 
 export interface ApiResponse<T> {
