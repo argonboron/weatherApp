@@ -6,16 +6,13 @@ import dotenv from 'dotenv';
 import { registerRoutes } from './routes/index.js';
 import { setupWebsocket } from './websocket/index.js';
 
-// Load env vars
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// TODO: Add middleware for logging, error handling, JWT auth
-
-registerRoutes(app); // Register REST routes
+registerRoutes(app);
 
 const server = http.createServer(app);
 const io = new Server(server, {

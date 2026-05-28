@@ -1,0 +1,12 @@
+.weather-logout {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+
+.weather-box {
+  min-height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

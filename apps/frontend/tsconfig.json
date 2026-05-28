@@ -5,6 +5,8 @@
     "rootDir": "src",
     "baseUrl": "src",
     "ignoreDeprecations": "6.0",
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
     "paths": {
       "@shared/*": ["../../packages/shared/dist/src/*"]
     }

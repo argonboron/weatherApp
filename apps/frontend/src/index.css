@@ -1,3 +1,91 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Basic CSS Reset and form styles */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  background: #e6ecf3;
+  color: #222;
+}
+
+.centered-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #3b82f6 0%, #64748b 100%);
+}
+
+.form-box {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+  padding: 2.5rem 2rem;
+  max-width: 70vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 500px;
+}
+
+.form-box h2 {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.form-box input {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  padding: 0.75rem 1rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 1rem;
+  font-size: 1rem;
+  background: #f8fafc;
+  color: #222;
+  transition: border 0.2s;
+}
+.form-box input:focus {
+  border-color: #2563eb;
+  outline: none;
+}
+.form-box input.error {
+  border-color: #ef4444;
+}
+.form-box button {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 1rem;
+  background: #2563eb;
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+  transition: background 0.2s;
+}
+.form-box button:hover {
+  background: #1d4ed8;
+}
+.form-box .error-message {
+  color: #ef4444;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.form-box .success-message {
+  color: #22c55e;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.form-box a {
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+.form-box a:hover {
+  text-decoration: underline;
+}
