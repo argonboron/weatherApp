@@ -1,14 +1,10 @@
 import { Router } from 'express';
-// import { z } from 'zod';
-// import { validate } from '../middleware/validate';
-// import { WeatherResponse } from '@shared/types';
+import { weatherQuerySchema } from '../validation/weatherSchemas.js';
+import { validateQuery } from '../middleware/validateQuery.js';
+import { getWeather } from '../controllers/weatherController.js';
 
 const router = Router();
 
-// TODO: Add Zod validation, controller logic
-router.get('/', (req, res) => {
-  // TODO: Fetch weather from WeatherAPI.com
-  res.json({ success: true, data: { city: req.query.city, temperature: 0, condition: 'TODO' } });
-});
+router.get('/', validateQuery(weatherQuerySchema), getWeather);
 
 export default router;
