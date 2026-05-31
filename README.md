@@ -20,8 +20,8 @@ A modern full-stack demo app with React, TypeScript, Node.js, Socket.IO, and Wea
 1. Install pnpm: `npm install -g pnpm`
 2. Install dependencies: `pnpm install`
 3. Copy `.env.example` to `.env` and fill in your API keys
-4. Start backend: `pnpm --filter backend dev`
-5. Start frontend: `pnpm --filter frontend dev`
+4. Build `pnpm build`
+5. To Run locally `pnpm run dev`
 
 ## Features
 
