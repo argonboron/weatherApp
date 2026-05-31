@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/auth': 'http://localhost:4000',
+      '/messages': 'http://localhost:4000',
     },
   },
   resolve: {

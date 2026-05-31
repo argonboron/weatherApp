@@ -19,7 +19,7 @@ const io = new Server(server, {
   cors: { origin: '*' },
 });
 
-setupWebsocket(io); // Setup Socket.IO handlers
+setupWebsocket(io);
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => {

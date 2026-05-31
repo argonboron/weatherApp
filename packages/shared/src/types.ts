@@ -1,5 +1,3 @@
-// Shared types/interfaces for the monorepo
-
 export interface User {
   id: string;
   username: string;
@@ -35,6 +33,7 @@ export interface Message {
   id: string;
   city: string;
   userId: string;
+  username: string;
   content: string;
   timestamp: number;
 }
@@ -50,7 +49,6 @@ export interface ApiResponse<T> {
   error?: string;
 }
 
-// Websocket event types
 export interface ClientToServerEvents {
   joinCity: (city: string) => void;
   sendMessage: (payload: { city: string; content: string }) => void;
