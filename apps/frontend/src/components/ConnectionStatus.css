@@ -8,7 +8,7 @@
   font-size: 0.95rem;
   font-weight: 500;
   color: #fff;
-  background: #888;
+  background: #696969;
   transition: background 0.2s;
 }
 .connection-status.connected {

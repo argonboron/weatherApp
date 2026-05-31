@@ -88,7 +88,20 @@ export default function ChatBox({ city, username }: ChatBoxProps) {
       {minimized ? (
         <div
           className="chatbox-minimized-bar"
+          role="button"
+          tabIndex={0}
+          aria-label="Open chat"
           onClick={() => {
+            setMinimized(false);
+            setUnread(0);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              setMinimized(false);
+              setUnread(0);
+            }
+          }}
+          onTouchStart={() => {
             setMinimized(false);
             setUnread(0);
           }}

@@ -12,7 +12,7 @@ export function setupWebsocket(io: Server) {
 
     socket.on('sendMessage', (payload) => {
       if (!payload.city || !payload.text) return;
-      const user = (socket as any).user;
+      const user = socket.user;
       const msg: Message = {
         id: Math.random().toString(36).slice(2),
         city: payload.city,

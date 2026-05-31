@@ -33,7 +33,6 @@ export default function CitySelect({ value, onChange }: CitySelectProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  // Only filter if user has typed after opening, not on initial open with prefilled text
   const [hasTyped, setHasTyped] = useState(false);
   const filtered =
     !hasTyped && value && open
