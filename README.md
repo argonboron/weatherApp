@@ -9,12 +9,14 @@ A modern full-stack demo app with React, TypeScript, Node.js, Socket.IO, and Wea
 - `packages/shared` — Shared types/interfaces
 
 ## Tech Stack
+
 - pnpm workspaces
-- React, Vite, TypeScript, React Router, TanStack Query, TailwindCSS, Zustand, Socket.IO client
+- React, Vite, TypeScript, React Router, TanStack Query, Socket.IO client
 - Node.js, Express, TypeScript, Socket.IO, Zod
 - Shared ESLint + Prettier config
 
 ## Setup
+
 1. Install pnpm: `npm install -g pnpm`
 2. Install dependencies: `pnpm install`
 3. Copy `.env.example` to `.env` and fill in your API keys
@@ -22,9 +24,6 @@ A modern full-stack demo app with React, TypeScript, Node.js, Socket.IO, and Wea
 5. Start frontend: `pnpm --filter frontend dev`
 
 ## Features
+
 - JWT auth, city selection, weather display, realtime messaging, websocket events
 - In-memory storage only (no DB)
-- See `/README.md` and code comments for architecture and extension points
-
-## TODO
-- Implement business logic, persistence, and tests as needed

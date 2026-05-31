@@ -1,3 +1,33 @@
+.weather-skeleton {
+  background: #f3f4f6;
+  border-radius: 12px;
+  padding: 24px 20px;
+  min-width: 260px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-start;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.weather-skeleton-header {
+  width: 120px;
+  height: 20px;
+  background: #e5e7eb;
+  border-radius: 6px;
+}
+.weather-skeleton-temp {
+  width: 80px;
+  height: 32px;
+  background: #e5e7eb;
+  border-radius: 6px;
+}
+.weather-skeleton-details {
+  width: 180px;
+  height: 16px;
+  background: #e5e7eb;
+  border-radius: 6px;
+}
 .weather-logout {
   position: absolute;
   top: 24px;

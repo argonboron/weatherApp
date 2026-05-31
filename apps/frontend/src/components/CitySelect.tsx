@@ -33,7 +33,12 @@ export default function CitySelect({ value, onChange }: CitySelectProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const filtered = CITIES.filter((city) => city.toLowerCase().includes(search.toLowerCase()));
+  // Only filter if user has typed after opening, not on initial open with prefilled text
+  const [hasTyped, setHasTyped] = useState(false);
+  const filtered =
+    !hasTyped && value && open
+      ? CITIES
+      : CITIES.filter((city) => city.toLowerCase().includes(search.toLowerCase()));
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
@@ -57,10 +62,12 @@ export default function CitySelect({ value, onChange }: CitySelectProps) {
         onFocus={() => {
           setOpen(true);
           setSearch(value);
+          setHasTyped(false);
         }}
         onChange={(e) => {
           setSearch(e.target.value);
           setOpen(true);
+          setHasTyped(true);
         }}
         autoComplete="off"
       />
@@ -79,7 +86,7 @@ export default function CitySelect({ value, onChange }: CitySelectProps) {
           )}
           {filtered.map((city, idx) => (
             <div
-              key={city}
+              key={idx}
               role="option"
               aria-selected={city === value}
               tabIndex={0}

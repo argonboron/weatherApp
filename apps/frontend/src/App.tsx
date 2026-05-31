@@ -1,13 +1,16 @@
-import React from 'react';
+import ProtectedRoute from './components/ProtectedRoute';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Weather from './pages/Weather';
 import { Routes, Route, Navigate } from 'react-router-dom';
-// TODO: Import layouts, pages, and providers
-
 const App = () => {
-  // TODO: Add auth state, protected routes, and layout
   return (
     <Routes>
-      {/* TODO: Add login/register routes */}
-      {/* TODO: Add protected home route */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/weather" element={<Weather />} />
+      </Route>
       <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
   );
