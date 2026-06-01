@@ -4,10 +4,7 @@
     "outDir": "dist",
     "baseUrl": ".",
     "rootDir": "src",
-    "ignoreDeprecations": "6.0",
-    "paths": {
-      "@shared/*": ["../../packages/shared/src/*"]
-    }
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"],

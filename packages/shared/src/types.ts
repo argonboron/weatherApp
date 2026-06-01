@@ -4,6 +4,13 @@ export interface User {
   hashedPassword: string;
 }
 
+export interface PublicUser {
+  id: string;
+  username: string;
+}
+
+export interface UserPayload extends PublicUser {}
+
 export interface AuthPayload {
   username: string;
   password: string;
@@ -11,8 +18,9 @@ export interface AuthPayload {
 
 export interface AuthResponse {
   success: boolean;
-  token: string;
-  user: User;
+  token?: string;
+  user?: PublicUser;
+  error?: string;
 }
 
 export interface WeatherResponse {
@@ -51,11 +59,15 @@ export interface ApiResponse<T> {
 
 export interface ClientToServerEvents {
   joinCity: (city: string) => void;
+  leaveCity: (city: string) => void;
   sendMessage: (payload: { city: string; content: string }) => void;
 }
 
 export interface ServerToClientEvents {
   message: (message: Message) => void;
   presence: (userIds: string[]) => void;
-  connectionStatus: (status: 'connected' | 'reconnecting' | 'disconnected') => void;
+  connectionStatus: (payload: {
+    status: 'connected' | 'reconnecting' | 'disconnected';
+    reason?: string;
+  }) => void;
 }

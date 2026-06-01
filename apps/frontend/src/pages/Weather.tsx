@@ -1,13 +1,13 @@
 import { useAuthStore } from '../store/authStore';
-import LogoutButton from '../components/LogoutButton';
+import LogoutButton from '../components/LogoutButton/LogoutButton';
 import './Weather.css';
-import CitySelect from '../components/CitySelect';
-import ConnectionStatus from '../components/ConnectionStatus';
+import CitySelect from '../components/CitySelect/CitySelect';
+import ConnectionStatus from '../components/ConnectionStatus/ConnectionStatus';
 
 import { useState, useEffect } from 'react';
 import { useWeatherQuery } from '../hooks/useWeatherQuery';
-import WeatherCard from '../components/WeatherCard';
-import ChatBox from '../components/ChatBox';
+import WeatherCard from '../components/WeatherCard/WeatherCard';
+import ChatBox from '../components/ChatBox/ChatBox';
 
 export default function Weather() {
   const user = useAuthStore((s) => s.user)?.username || 'World';
@@ -15,7 +15,7 @@ export default function Weather() {
   const { data, isLoading, isError, error } = useWeatherQuery(city);
 
   useEffect(() => {
-    if (data?.success && typeof data.data.isDay === 'boolean') {
+    if (data?.success && data.data && typeof data.data.isDay === 'boolean') {
       if (data.data.isDay) {
         document.body.classList.remove('dark');
       } else {
@@ -72,7 +72,6 @@ export default function Weather() {
               />
             </div>
           )}
-          {/* API error state */}
           {data && !data.success && (
             <div style={{ marginTop: 16, color: 'red' }}>API Error: {data.error}</div>
           )}
