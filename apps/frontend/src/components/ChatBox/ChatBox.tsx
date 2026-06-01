@@ -1,15 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import socket from '../realtime/socket';
-import { useAuthStore } from '../store/authStore';
+import socket from '../../realtime/socket';
+import { useAuthStore } from '../../store/authStore';
+import type { ApiResponse, Message } from '@shared/types';
+import api from '../../api/client';
 import './ChatBox.css';
-
-interface Message {
-  id: string;
-  city: string;
-  userId: string;
-  content: string;
-  timestamp: number;
-}
 
 interface ChatBoxProps {
   readonly city: string;
@@ -35,17 +29,15 @@ export default function ChatBox({ city, username }: ChatBoxProps) {
 
   useEffect(() => {
     if (!city || typeof city !== 'string' || !city.trim()) return;
-    socket.emit('leaveCity');
+    socket.emit('leaveCity', city);
     setMessages([]);
     socket.emit('joinCity', city);
     setJoined(true);
     setToast(`You have joined #${city}`);
 
-    fetch(`/api/messages/${encodeURIComponent(city)}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) setMessages(data.data);
-      });
+    api.get<ApiResponse<Message[]>>(`/messages/${encodeURIComponent(city)}`).then(({ data }) => {
+      if (data.success) setMessages(data.data ?? []);
+    });
 
     const handleMessage = (msg: Message) => {
       if (msg.city === city) {
@@ -72,15 +64,10 @@ export default function ChatBox({ city, username }: ChatBoxProps) {
     if (!input.trim()) return;
     socket.emit('sendMessage', {
       city,
-      text: input,
+      content: input,
     });
     setInput('');
     setToast('Message sent!');
-    await fetch('/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ city, text: input }),
-    });
   };
 
   return (
@@ -132,7 +119,7 @@ export default function ChatBox({ city, username }: ChatBoxProps) {
                 className={`chatbox-msg${msg.userId === user?.id ? ' chatbox-msg-own' : ''}`}
               >
                 <span className="chatbox-msg-user">
-                  {msg.userId === user?.id ? username : msg.userId}
+                  {msg.userId === user?.id ? username : msg.username}
                 </span>
                 <span className="chatbox-msg-content">{msg.content}</span>
                 <span className="chatbox-msg-time">

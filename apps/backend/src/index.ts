@@ -5,6 +5,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { registerRoutes } from './routes/index.js';
 import { setupWebsocket } from './websocket/index.js';
+import type { ClientToServerEvents, ServerToClientEvents } from '@shared/types';
 
 dotenv.config();
 
@@ -28,12 +29,14 @@ app.use(express.json());
 registerRoutes(app);
 
 const server = http.createServer(app);
-const io = new Server(server, {
+const io = new Server<ClientToServerEvents, ServerToClientEvents>(server, {
   cors: {
     origin: allowedOrigins,
     credentials: true,
   },
 });
+
+app.set('io', io);
 
 setupWebsocket(io);
 

@@ -1,8 +1,9 @@
 import { Server } from 'socket.io';
 import { verifyJWT } from '../middleware/auth.js';
-import { Message } from '@shared/types.js';
+import type { ClientToServerEvents, ServerToClientEvents } from '@shared/types';
+import { createMessage } from '../services/messageService.js';
 
-export function setupWebsocket(io: Server) {
+export function setupWebsocket(io: Server<ClientToServerEvents, ServerToClientEvents>) {
   io.use(verifyJWT);
 
   io.on('connection', (socket) => {
@@ -10,17 +11,19 @@ export function setupWebsocket(io: Server) {
       socket.join(city);
     });
 
-    socket.on('sendMessage', (payload) => {
-      if (!payload.city || !payload.text) return;
+    socket.on('leaveCity', (city: string) => {
+      socket.leave(city);
+    });
+
+    socket.on('sendMessage', (payload: { city: string; content: string }) => {
+      if (!payload.city || !payload.content) return;
       const user = socket.user;
-      const msg: Message = {
-        id: Math.random().toString(36).slice(2),
+      const msg = createMessage({
         city: payload.city,
-        userId: user?.id || 'anonymous',
-        username: user?.username || 'Anonymous',
-        content: payload.text,
-        timestamp: Date.now(),
-      };
+        content: payload.content,
+        userId: user?.id,
+        username: user?.username,
+      });
       io.to(payload.city).emit('message', msg);
     });
 

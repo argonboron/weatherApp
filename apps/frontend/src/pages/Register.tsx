@@ -1,6 +1,16 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import type { AuthResponse } from '@shared/types';
+import api from '../api/client';
 import { useAuthStore } from '../store/authStore';
+import './Register.css';
+
+function getErrorMessage(err: unknown): string {
+  if (err instanceof Error) {
+    return err.message;
+  }
+  return 'Registration failed';
+}
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -29,19 +39,15 @@ export default function Register() {
     }
     setLoading(true);
     try {
-      const res = await fetch('/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await res.json();
+      const { data } = await api.post<AuthResponse>('/auth/register', { username, password });
       if (!data.success) throw new Error(data.error || 'Registration failed');
+      if (!data.token || !data.user) throw new Error('Malformed registration response');
 
       loginStore(data.token, data.user);
       setSuccess('Registration successful! Redirecting...');
       setTimeout(() => navigate('/weather'), 1200);
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -73,7 +79,7 @@ export default function Register() {
           {loading ? 'Registering...' : 'Register'}
         </button>
         <div>
-          <a href="/login">Already have an account? Login</a>
+          <Link to="/login">Already have an account? Login</Link>
         </div>
       </form>
     </div>

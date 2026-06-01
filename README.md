@@ -1,29 +1,111 @@
 # Realtime Weather + Messaging Monorepo
 
-A modern full-stack demo app with React, TypeScript, Node.js, Socket.IO, and WeatherAPI.com.
+This is a full-stack TypeScript app with a small surface area and clear boundaries.
 
-## Monorepo Structure
+## Built With
 
-- `apps/frontend` — React + Vite + TypeScript client
-- `apps/backend` — Node.js + Express + TypeScript + Socket.IO server
-- `packages/shared` — Shared types/interfaces
+- React + Vite + TypeScript on the frontend
+- Node.js + Express + TypeScript on the backend
+- Socket.IO for realtime messages
+- TanStack Query for server state
+- Zustand for auth state
+- Zod for request validation
+- A shared workspace package for common types
 
-## Tech Stack
+## Structure
 
-- pnpm workspaces
-- React, Vite, TypeScript, React Router, TanStack Query, Socket.IO client
-- Node.js, Express, TypeScript, Socket.IO, Zod
-- Shared ESLint + Prettier config
+The folder layout is there to keep the code easy to scan:
+
+- backend controllers handle HTTP orchestration
+- backend middleware covers auth and validation
+- backend services hold business logic and in-memory data
+- backend validation keeps request shapes explicit
+- frontend pages own route-level UI
+- frontend reusable UI is grouped by component, with styles next to the component
+- frontend realtime code stays in a dedicated folder
+- shared types live in a workspace package so both apps use the same contracts
+
+## Repository Layout
+
+```text
+apps/
+  backend/
+	 src/
+		controllers/
+		middleware/
+		routes/
+		services/
+		tests/
+		utils/
+		validation/
+		websocket/
+  frontend/
+	 src/
+		api/
+		components/
+		  ChatBox/
+		  CitySelect/
+		  ConnectionStatus/
+		  LogoutButton/
+		  ProtectedRoute/
+		  WeatherCard/
+		hooks/
+		pages/
+		providers/
+		realtime/
+		routes/
+		store/
+packages/
+  shared/
+```
 
 ## Setup
 
-1. Install pnpm: `npm install -g pnpm`
-2. Install dependencies: `pnpm install`
-3. Copy `.env.example` to `.env` and fill in your API keys
-4. Build `pnpm build`
-5. To Run locally `pnpm run dev`
+1. Install dependencies.
 
-## Features
+   ```bash
+   pnpm install
+   ```
 
-- JWT auth, city selection, weather display, realtime messaging, websocket events
-- In-memory storage only (no DB)
+2. Create a `.env` file with the values the app reads:
+
+   ```bash
+   JWT_SECRET=your-secret
+   WEATHER_API_KEY=your-weather-api-key
+   VITE_API_URL=http://localhost:4000
+   VITE_SOCKET_URL=http://localhost:4000
+   PORT=4000
+   ```
+
+3. Start the workspace.
+
+   ```bash
+   pnpm run dev
+   ```
+
+4. Build everything.
+
+   ```bash
+   pnpm run build
+   ```
+
+5. Run the backend tests.
+
+   ```bash
+   pnpm test
+   ```
+
+## Notes
+
+- The app uses in-memory storage, so data resets on restart.
+- Authentication is intentionally lightweight.
+- REST and websocket traffic share the same contracts through `@shared/types`.
+- The backend keeps REST and websocket code separate on purpose.
+
+## Validation
+
+The repository currently builds with:
+
+```bash
+pnpm -r run build
+```

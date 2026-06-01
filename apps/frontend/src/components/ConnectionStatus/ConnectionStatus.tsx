@@ -1,4 +1,4 @@
-import { useSocket } from '../providers/SocketProvider';
+import { useSocket } from '../../providers/SocketProvider';
 import './ConnectionStatus.css';
 
 export default function ConnectionStatus() {

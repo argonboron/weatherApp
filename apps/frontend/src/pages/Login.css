@@ -37,13 +37,16 @@
   color: #222;
   transition: border 0.2s;
 }
+
 .form-box input:focus {
   border-color: #2563eb;
   outline: none;
 }
+
 .form-box input.error {
   border-color: #ef4444;
 }
+
 .form-box button {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -57,67 +60,23 @@
   margin-bottom: 0.5rem;
   transition: background 0.2s;
 }
+
 .form-box button:hover {
   background: #1d4ed8;
 }
+
 .form-box .error-message {
   color: #ef4444;
   margin-bottom: 1rem;
   text-align: center;
 }
-.form-box .success-message {
-  color: #22c55e;
-  margin-bottom: 1rem;
-  text-align: center;
-}
+
 .form-box a {
   color: #2563eb;
   text-decoration: none;
   font-size: 0.95rem;
 }
+
 .form-box a:hover {
   text-decoration: underline;
-}
-
-.weather-skeleton {
-  background: #f3f4f6;
-  border-radius: 12px;
-  padding: 24px 20px;
-  min-width: 260px;
-  min-height: 120px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: flex-start;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-}
-.weather-skeleton-header {
-  width: 120px;
-  height: 20px;
-  background: #e5e7eb;
-  border-radius: 6px;
-}
-.weather-skeleton-temp {
-  width: 80px;
-  height: 32px;
-  background: #e5e7eb;
-  border-radius: 6px;
-}
-.weather-skeleton-details {
-  width: 180px;
-  height: 16px;
-  background: #e5e7eb;
-  border-radius: 6px;
-}
-.weather-logout {
-  position: absolute;
-  top: 24px;
-  right: 24px;
-}
-
-.weather-box {
-  min-height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }

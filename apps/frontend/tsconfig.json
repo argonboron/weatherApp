@@ -2,14 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "src",
-    "baseUrl": "src",
+    "baseUrl": ".",
+    "rootDir": "../..",
     "ignoreDeprecations": "6.0",
     "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "paths": {
-      "@shared/*": ["../../packages/shared/dist/src/*"]
-    }
+    "jsxImportSource": "react"
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]

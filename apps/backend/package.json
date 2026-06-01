@@ -7,10 +7,12 @@
     "dev": "nodemon dist/index.js",
     "build": "tsc",
     "start": "node dist/index.js",
+    "test": "pnpm run build && node --test dist/tests",
     "lint": "eslint . --ext .ts,.js",
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@shared/types": "workspace:*",
     "axios": "^1.16.1",
     "bcrypt": "^6.0.0",
     "dotenv": "^17.4.2",

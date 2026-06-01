@@ -1,6 +1,16 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import type { AuthResponse } from '@shared/types';
+import api from '../api/client';
 import { useAuthStore } from '../store/authStore';
+import './Login.css';
+
+function getErrorMessage(err: unknown): string {
+  if (err instanceof Error) {
+    return err.message;
+  }
+  return 'Login failed';
+}
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -27,17 +37,13 @@ export default function Login() {
     }
     setLoading(true);
     try {
-      const res = await fetch('/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
-      });
-      const data = await res.json();
+      const { data } = await api.post<AuthResponse>('/auth/login', { username, password });
       if (!data.success) throw new Error(data.error || 'Login failed');
+      if (!data.token || !data.user) throw new Error('Malformed login response');
       loginStore(data.token, data.user);
       navigate('/weather');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
@@ -66,7 +72,7 @@ export default function Login() {
           {loading ? 'Logging in...' : 'Login'}
         </button>
         <div>
-          <a href="/register">Don't have an account? Register</a>
+          <Link to="/register">Don't have an account? Register</Link>
         </div>
       </form>
     </div>

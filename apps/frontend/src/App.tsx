@@ -1,4 +1,4 @@
-import ProtectedRoute from './components/ProtectedRoute';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Weather from './pages/Weather';

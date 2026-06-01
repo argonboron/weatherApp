@@ -8,7 +8,7 @@ const WEATHER_API_URL = 'https://api.weatherapi.com/v1/current.json';
 
 export async function getWeatherForCity(city: string): Promise<WeatherResponse> {
   const API_KEY = process.env.WEATHER_API_KEY;
-  if (!API_KEY) throw new Error('Weather API key not set in environment, WAH');
+  if (!API_KEY) throw new Error('Weather API key is not configured');
 
   const cached = weatherCache.get(city.toLowerCase());
   if (cached && cached.expires > Date.now()) {
